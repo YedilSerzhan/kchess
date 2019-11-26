@@ -17,6 +17,11 @@ public class TestController {
         return userAccount;
     }
 
+    @GetMapping("/test/greeting")
+    public String greeting(UserAccount userAccount) {
+        return "Hello!";
+    }
+
     private class TestReply {
         private int code = 0;
 
