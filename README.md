@@ -1,2 +1,3 @@
-# kchess
-Kchess - an Android chess game backend service
+# Kchess
+
+backend service for Kchess game.
