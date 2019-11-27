@@ -1,7 +1,0 @@
-{
-  "name": "dtinder-outer-app",
-  "version": "0.1.0",
-  "scripts": {
-    "build": "echo"
-  }
-}
