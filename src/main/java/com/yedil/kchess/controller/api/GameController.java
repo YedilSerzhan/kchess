@@ -24,6 +24,22 @@ public class GameController {
         int gameId;
         String FEN;
 
+        public int getGameId() {
+            return gameId;
+        }
+
+        public void setGameId(int gameId) {
+            this.gameId = gameId;
+        }
+
+        public String getFEN() {
+            return FEN;
+        }
+
+        public void setFEN(String FEN) {
+            this.FEN = FEN;
+        }
+
         Game(int gameId, String FEN) {
             this.gameId = gameId;
             this.FEN = FEN;
