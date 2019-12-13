@@ -8,10 +8,10 @@ import javax.persistence.Table;
 @Table(name = "game")
 public class Game extends BaseEntity {
 
-    @Column(name = "whiteId")
+    @Column(name = "white_id")
     private Long whiteId;
 
-    @Column(name = "blackId")
+    @Column(name = "black_id")
     private Long blackId;
 
     @Column(name = "FEN")
