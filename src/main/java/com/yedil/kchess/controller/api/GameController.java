@@ -1,6 +1,8 @@
 package com.yedil.kchess.controller.api;
 
 import com.yedil.kchess.data.entity.Game;
+import com.yedil.kchess.service.GameService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,18 +12,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/game")
 public class GameController {
 
+    private final GameService gameService;
+
+    @Autowired
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
 
     @GetMapping(path = "/new")
-    public Game getGameId(){
+    public Game getGameId() {
+        return gameService.makeMatch();
+    }
 
-        return null;
-//        final Game game = new Game(1, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-//        return game;
+    @PostMapping(path = "/make/move")
+    public Game makeMove(Game game) {
+        System.out.println(game);
+        return gameService.makeMove(game);
+    }
+
+    @GetMapping(path = "/get/move")
+    public Game getLatestMove() {
+        return gameService.getLatestMove();
     }
 
 
-
-    private class Position{
+    private class Position {
 
         int gameId;
         String FEN;

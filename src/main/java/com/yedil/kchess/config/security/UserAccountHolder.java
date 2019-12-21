@@ -11,7 +11,7 @@ public class UserAccountHolder {
         UserAccount userAccount = null;
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!(authentication instanceof AnonymousAuthenticationToken)) {
-            final TinderUser user = (TinderUser) authentication.getPrincipal();
+            final ChessUser user = (ChessUser) authentication.getPrincipal();
             userAccount = user.getUserAccount();
         }
         return userAccount;

@@ -8,11 +8,11 @@ import javax.persistence.Table;
 @Table(name = "game")
 public class Game extends BaseEntity {
 
-    @Column(name = "white_id")
-    private Long whiteId;
+    @Column(name = "white")
+    private String white;
 
-    @Column(name = "black_id")
-    private Long blackId;
+    @Column(name = "black")
+    private String black;
 
     @Column(name = "FEN")
     private String fen;
@@ -35,20 +35,35 @@ public class Game extends BaseEntity {
     @Column(name = "next_move")
     private String next_move;
 
-    public Long getWhiteId() {
-        return whiteId;
+    public String getWhite() {
+        return white;
     }
 
-    public void setWhiteId(Long whiteId) {
-        this.whiteId = whiteId;
+    public void setWhite(String white) {
+        this.white = white;
     }
 
-    public Long getBlackId() {
-        return blackId;
+    public String getBlack() {
+        return black;
     }
 
-    public void setBlackId(Long blackId) {
-        this.blackId = blackId;
+    public void setBlack(String black) {
+        this.black = black;
+    }
+
+    public Game() {
+    }
+
+    public Game(String white, String black, String fen, String result, int from_x, int from_y, int to_x, int to_y, String next_move) {
+        this.white = white;
+        this.black = black;
+        this.fen = fen;
+        this.result = result;
+        this.from_x = from_x;
+        this.from_y = from_y;
+        this.to_x = to_x;
+        this.to_y = to_y;
+        this.next_move = next_move;
     }
 
     public String getFen() {

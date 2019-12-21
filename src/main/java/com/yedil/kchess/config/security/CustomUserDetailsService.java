@@ -17,10 +17,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional(readOnly = true)
-    public TinderUser loadUserByUsername(String username) throws UsernameNotFoundException {
+    public ChessUser loadUserByUsername(String username) throws UsernameNotFoundException {
         UserAccount userAccount = userAccountRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return new TinderUser(userAccount);
+        return new ChessUser(userAccount);
     }
 
 
