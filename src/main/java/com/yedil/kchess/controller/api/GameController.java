@@ -1,5 +1,6 @@
 package com.yedil.kchess.controller.api;
 
+import com.yedil.kchess.data.entity.Game;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,14 @@ public class GameController {
     @GetMapping(path = "/new")
     public Game getGameId(){
 
-        final Game game = new Game(1, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
-        return game;
+        return null;
+//        final Game game = new Game(1, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+//        return game;
     }
 
 
 
-    private class Game{
+    private class Position{
 
         int gameId;
         String FEN;
@@ -40,7 +42,7 @@ public class GameController {
             this.FEN = FEN;
         }
 
-        Game(int gameId, String FEN) {
+        Position(int gameId, String FEN) {
             this.gameId = gameId;
             this.FEN = FEN;
         }
