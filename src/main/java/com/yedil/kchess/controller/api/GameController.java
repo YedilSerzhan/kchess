@@ -12,9 +12,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Log4j2
 @Controller
@@ -23,10 +21,10 @@ public class GameController {
     //不存已经开始的游戏，存正在排队的人。
     //存房间id 和 人， 离开了直接发送消息给房间
 
-    private ArrayList<String> roomsForStandard2P = new ArrayList<>();
-    private ArrayList<String> roomsForExtended2P = new ArrayList<>();
-    private ArrayList<String> roomsForExtended4P = new ArrayList<>();
-    private ArrayList<String> roomsForExtended4PT = new ArrayList<>();
+    private static List roomsForStandard2P = Collections.synchronizedList(new ArrayList());
+    private static List roomsForExtended2P = Collections.synchronizedList(new ArrayList());
+    private static List roomsForExtended4P = Collections.synchronizedList(new ArrayList());
+    private static List roomsForExtended4PT = Collections.synchronizedList(new ArrayList());
 
     public static Map<String,String> players = new HashMap<>();
 
@@ -46,6 +44,7 @@ public class GameController {
         String room_id = null;
         MatchMakingMessageType currentType = matchMakingMessage.getMessageType();
         if (currentType.equals(MatchMakingMessageType.CONNECT)) {
+            cancelOption(newPlayer, matchMakingMessage);
             room_id = connectOption(newPlayer, matchMakingMessage);
             if(room_id != null){
                 headerAccessor.getSessionAttributes().put("username",newPlayer);
@@ -56,7 +55,7 @@ public class GameController {
         } else {
             log.error("Wrong number of players received in makeMatch");
         }
-        log.info("Received a making matching message: " + matchMakingMessage.toString());
+        log.info("Received a making matching message: " + newPlayer +matchMakingMessage.toString());
         logAllArgs();
         //template.convertAndSend("/queue/makeMatch-" + newPlayer.getId(), matchMakingMessage);
     }
@@ -122,7 +121,7 @@ public class GameController {
         }
     }
 
-    public String makeMatchMethod(ArrayList<String> room, String newPlayer, int n){
+    public String makeMatchMethod(List room, String newPlayer, int n){
         room.add(newPlayer);
         String room_id = null;
         StringBuilder sb = new StringBuilder();
@@ -143,5 +142,9 @@ public class GameController {
 
     public static void logAllArgs(){
         log.info("Current player maps: " + players.toString());
+        log.info("Current roomsForStandard2P: " + roomsForStandard2P.toString());
+        log.info("Current roomsForExtended2P: " + roomsForExtended2P.toString());
+        log.info("Current roomsForExtended4P: " + roomsForExtended4P.toString());
+        log.info("Current roomsForExtended4PT: " + roomsForExtended4PT.toString());
     }
 }
