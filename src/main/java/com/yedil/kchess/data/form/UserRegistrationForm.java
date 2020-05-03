@@ -15,8 +15,8 @@ public class UserRegistrationForm extends BaseForm {
     @StrongPassword
     private String password;
 
-    @Size(min = 1, max = 255)
-    private String passwordVerification;
+//    @Size(min = 1, max = 255)
+//    private String passwordVerification;
 
     public String getUsername() {
         return username;
@@ -34,16 +34,16 @@ public class UserRegistrationForm extends BaseForm {
         this.password = password;
     }
 
-    public String getPasswordVerification() {
-        return passwordVerification;
-    }
-
-    public void setPasswordVerification(String passwordVerification) {
-        this.passwordVerification = passwordVerification;
-    }
-
-    @AssertTrue(message = "passwords.not.match")
-    public boolean isEqualPasswords() {
-        return password.equals(passwordVerification);
-    }
+//    public String getPasswordVerification() {
+//        return passwordVerification;
+//    }
+//
+//    public void setPasswordVerification(String passwordVerification) {
+//        this.passwordVerification = passwordVerification;
+//    }
+//
+//    @AssertTrue(message = "passwords.not.match")
+//    public boolean isEqualPasswords() {
+//        return password.equals(passwordVerification);
+//    }
 }
