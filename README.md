@@ -1,3 +1,3 @@
 # Kchess
 
-backend service for Kchess game.
+backend service for Kchess game2P.

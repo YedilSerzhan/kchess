@@ -1,38 +1,35 @@
 package com.yedil.kchess.controller.api;
 
-import com.yedil.kchess.data.entity.Game;
-import com.yedil.kchess.service.GameService;
+import com.yedil.kchess.data.entity.Game2P;
+import com.yedil.kchess.service.Game2PService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/api/game")
+@RequestMapping(path = "/api")
 public class GameController {
 
-    private final GameService gameService;
+    private final Game2PService game2PService;
 
     @Autowired
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
+    public GameController(Game2PService game2PService) {
+        this.game2PService = game2PService;
     }
 
-    @GetMapping(path = "/new")
-    public Game getGameId() {
-        return gameService.makeMatch();
+    @GetMapping(path = "game2p/new/{type}")
+    public Game2P getGameId(@PathVariable(name = "type") Integer type) {
+        return game2PService.makeMatch(type);
     }
 
-    @PostMapping(path = "/make/move")
-    public Game makeMove(Game game) {
-        System.out.println(game);
-        return gameService.makeMove(game);
+    @PostMapping(path = "game2p/make/move")
+    public Game2P makeMove(Game2P game2P) {
+        System.out.println(game2P);
+        return game2PService.makeMove(game2P);
     }
 
-    @GetMapping(path = "/get/move")
-    public Game getLatestMove() {
-        return gameService.getLatestMove();
+    @GetMapping(path = "game2p/get/move")
+    public Game2P getLatestMove() {
+        return game2PService.getLatestMove();
     }
 
 

@@ -5,17 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "game")
-public class Game extends BaseEntity {
+@Table(name = "game2P")
+public class Game2P extends BaseEntity {
 
-    @Column(name = "white")
-    private String white;
+    @Column(name = "player1")
+    private String player1;
 
-    @Column(name = "black")
-    private String black;
+    @Column(name = "player2")
+    private String player2;
 
     @Column(name = "FEN")
-    private String fen;
+    private String FEN;
 
     @Column(name = "result")
     private String result;
@@ -32,46 +32,63 @@ public class Game extends BaseEntity {
     @Column(name = "to_y")
     private int to_y;
 
-    @Column(name = "next_move")
-    private String next_move;
+    @Column(name = "made_by")
+    private String made_by;
 
-    public String getWhite() {
-        return white;
+    @Column(name = "type")
+    private int type;
+
+    public int getType() {
+        return type;
     }
 
-    public void setWhite(String white) {
-        this.white = white;
+    public void setType(int game_type) {
+        this.type = game_type;
     }
 
-    public String getBlack() {
-        return black;
+    public Game2P(int type) {
+        this.type = type;
     }
 
-    public void setBlack(String black) {
-        this.black = black;
+    public String getPlayer1() {
+        return player1;
     }
 
-    public Game() {
+    public void setPlayer1(String white) {
+        this.player1 = white;
     }
 
-    public Game(String white, String black, String fen, String result, int from_x, int from_y, int to_x, int to_y, String next_move) {
-        this.white = white;
-        this.black = black;
-        this.fen = fen;
+    public String getPlayer2() {
+        return player2;
+    }
+
+    public void setPlayer2(String black) {
+        this.player2 = black;
+    }
+
+    public Game2P() {
+    }
+
+    public Game2P(String player1, String player2, String FEN, String result,
+                  int from_x, int from_y, int to_x, int to_y, String made_by, int type) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.FEN = FEN;
         this.result = result;
         this.from_x = from_x;
         this.from_y = from_y;
         this.to_x = to_x;
         this.to_y = to_y;
-        this.next_move = next_move;
+        this.made_by = made_by;
+        this.type = type;
     }
 
     public String getFen() {
-        return fen;
+        return FEN;
     }
 
     public void setFen(String fen) {
-        this.fen = fen;
+        this.FEN = fen;
     }
 
     public String getResult() {
@@ -114,11 +131,11 @@ public class Game extends BaseEntity {
         this.to_y = to_y;
     }
 
-    public String getNext_move() {
-        return next_move;
+    public String getMade_by() {
+        return made_by;
     }
 
-    public void setNext_move(String next_move) {
-        this.next_move = next_move;
+    public void setMade_by(String next_move) {
+        this.made_by = next_move;
     }
 }
