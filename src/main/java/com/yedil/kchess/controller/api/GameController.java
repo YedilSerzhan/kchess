@@ -18,18 +18,22 @@ public class GameController {
 
     @GetMapping(path = "game2p/new/{type}")
     public Game2P getGameId(@PathVariable(name = "type") Integer type) {
-        return game2PService.makeMatch(type);
+        Game2P game2P = game2PService.makeMatch(type);
+//        System.out.println("game2p/new/"+ String.valueOf(type)+" "+game2P.toString());
+        return  game2P;
     }
 
     @PostMapping(path = "game2p/make/move")
     public Game2P makeMove(Game2P game2P) {
-        System.out.println(game2P);
+//        System.out.println("game2p/make/move "+game2P.toString());
         return game2PService.makeMove(game2P);
     }
 
     @GetMapping(path = "game2p/get/move")
     public Game2P getLatestMove() {
-        return game2PService.getLatestMove();
+        Game2P game2P = game2PService.getLatestMove();
+//        System.out.println("game2p/get/move" +game2P.toString());
+        return game2P;
     }
 
 

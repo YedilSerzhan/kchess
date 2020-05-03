@@ -138,4 +138,21 @@ public class Game2P extends BaseEntity {
     public void setMade_by(String next_move) {
         this.made_by = next_move;
     }
+
+    @Override
+    public String toString() {
+        return "Game2P{" +
+                "id=" + id +
+                ", player1='" + player1 + '\'' +
+                ", player2='" + player2 + '\'' +
+                ", FEN='" + FEN + '\'' +
+                ", result='" + result + '\'' +
+                ", from_x=" + from_x +
+                ", from_y=" + from_y +
+                ", to_x=" + to_x +
+                ", to_y=" + to_y +
+                ", made_by='" + made_by + '\'' +
+                ", type=" + type +
+                '}';
+    }
 }
