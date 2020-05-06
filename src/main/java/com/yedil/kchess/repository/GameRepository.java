@@ -14,5 +14,7 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     Game findByPlayer1OrPlayer2(String player1, String player2);
 
     Game findByPlayer2AndType(String player2, int game_type);
+    Game findByPlayer3AndType(String player3, int game_type);
+    Game findByPlayer4AndType(String player4, int game_type);
 
 }

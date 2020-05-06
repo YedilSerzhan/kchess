@@ -29,9 +29,9 @@ public class GameController {
         return gameService.makeMove(game);
     }
 
-    @GetMapping(path = "game/get/move")
-    public Game getLatestMove() {
-        Game game = gameService.getLatestMove();
+    @GetMapping(path = "game/get/move/{id}")
+    public Game getLatestMove(@PathVariable(name = "id") Long id) {
+        Game game = gameService.getLatestMove(id);
 //        System.out.println("game2p/get/move" +game2P.toString());
         return game;
     }

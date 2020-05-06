@@ -21,27 +21,48 @@ public class GameService {
 
     @Transactional
     public Game makeMatch(int type) {
-        int nums_of_players = type < 3 ? 2 : 4;
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
         //System.out.println(name);
         if (gameRepository.existsByPlayer1OrPlayer2OrPlayer3OrPlayer4(name, name, name, name)) {
             gameRepository.deleteByPlayer1OrPlayer2OrPlayer3OrPlayer4(name, name, name, name);
         }
-        if (type == 1 || type == 2) {
-            Game findGame = gameRepository.findByPlayer2AndType("", type);
-            if (findGame != null) {
-                findGame.setPlayer2(name);
-                gameRepository.save(findGame);
-                return findGame;
-            } else {
-                Game game = new Game(name, "", "", "", "", "",
-                        0, 0, 0, 0, "", type);
-                gameRepository.save(game);
-                return game;
+        Game findGame;
+        int pos;
+        if (type >= 1 && type <= 4) {
+            findGame = gameRepository.findByPlayer2AndType("", type);
+            pos = 2;
+            if (type > 2) {
+                if (findGame == null) {
+                    findGame = gameRepository.findByPlayer3AndType("", type);
+                    pos = 3;
+                    if (findGame == null) {
+                        findGame = gameRepository.findByPlayer4AndType("", type);
+                        pos = 4;
+                    }
+                }
             }
-        } else {
+            if (findGame == null) {
+                pos = 1;
+                findGame = new Game("", "", "", "", "", "",
+                        0, 0, 0, 0, "", type);
+            }
+            findGame = setPlayAndSave(name, pos, findGame);
+            return findGame;
+        } else
             return null;
-        }
+    }
+
+    Game setPlayAndSave(String player, int pos, Game game) {
+        if (pos == 1) {
+            game.setPlayer1(player);
+        } else if (pos == 2)
+            game.setPlayer2(player);
+        else if (pos == 3)
+            game.setPlayer3(player);
+        else if (pos == 4)
+            game.setPlayer4(player);
+        gameRepository.save(game);
+        return game;
     }
 
     public Game makeMove(Game game) {
@@ -49,9 +70,8 @@ public class GameService {
         return game;
     }
 
-    public Game getLatestMove() {
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        Game game = gameRepository.findByPlayer1OrPlayer2(name, name);
+    public Game getLatestMove(Long id) {
+        Game game = gameRepository.findById(id).orElse(null);
         return game;
     }
 }
