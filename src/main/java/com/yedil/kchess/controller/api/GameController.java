@@ -35,4 +35,9 @@ public class GameController {
 //        System.out.println("game2p/get/move" +game2P.toString());
         return game;
     }
+
+    @GetMapping(path = "game/cancel/{id}")
+    public void cancelMatch(@PathVariable(name = "id") Long id) {
+        gameService.cancelMatch(id);
+    }
 }

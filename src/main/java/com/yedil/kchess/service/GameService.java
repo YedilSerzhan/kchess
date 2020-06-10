@@ -86,4 +86,8 @@ public class GameService {
         Game game = gameRepository.findById(id).orElse(null);
         return game;
     }
+
+    public void cancelMatch(Long id){
+        gameRepository.deleteById(id);
+    }
 }
